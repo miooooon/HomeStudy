@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8" />
+<meta data-detaills="origin:jsp/app/asc-ni.jsp" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>WebMaterial</title>
+</head>
+<body onload="start()">
+
+  <div class="menu">
+    <th:block th:replace="/main/fragments::item_menu"></th:block>
+  </div>
+  <div class="main">
+    <form role="form" action="/question/confirm" th:action="@{/question/confirm}"
+      th:object="${questionForm}" method="post">
+      
+      <label><abbr title="required">種類</abbr></label>
+      <div class="radio" th:each="item : ${selectItems}">
+        <label> <input type="radio" name="item"
+          th:value="${item.value}" th:text="${item.key}"
+          th:field="*{fradio}">radio</input>
+        </label>
+      </div>
+      <br>
+      
+      <label><abbr title="required">タグ</abbr></label>
+      <div class="radio" th:each="item : ${selectTags}">
+        <label> <input type="radio" name="tag"
+          th:value="${item.value}" th:text="${item.key}"
+          th:field="*{fradio2}">radio</input>
+        </label>
+      </div>
+      <span th:if="${#fields.hasErrors('fradio')}" th:errors="*{fradio}"
+        class="help-block">error!</span> <br> <input type="submit"
+        value="確認" />
+    </form>
+  </div>
+</body>
+</html>

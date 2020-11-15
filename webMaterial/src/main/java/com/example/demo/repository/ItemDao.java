@@ -40,6 +40,8 @@ public class ItemDao {
         }
         return itemDetail;
     }
+    
+
 //
 //    /**
 //     * コネクションをクローズします.

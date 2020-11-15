@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>WebItem</title>
+</head>
+<body>
+  <!--/* メニューリスト */-->
+  <div th:fragment="item_menu">
+    <ul>
+      <li>
+        <div class="item_btn">
+          <div class="line_eff line_color1"></div>
+          <a href="http://localhost:8081/item/picture"> いらすと </a>
+        </div>
+      </li>
+      <li>
+        <div class="item_btn">
+          <div class="line_eff line_color2"></div>
+          <a href="http://localhost:8081/item/photo"> しゃしん </a>
+        </div>
+      </li>
+      <li>
+        <div class="item_btn">
+          <div class="line_eff line_color3"></div>
+          <a href="http://localhost:8081/item/icon"> あいこん </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <!--/* エラー */-->
+    <div th:fragment="err_msg">
+      <p>読み込みに失敗しました。</p>
+    </div>
+    <!--/* アイテムリスト */-->
+
+    <div th:fragment="item_list">
+      <ul class="item_list">
+        <li th:each="itemList : ${itemList}" th:object="${itemList}">
+
+          <table class="item_table">
+            <tbody>
+              <tr>
+                <th class="text-center"><p th:text="*{title}">素材名</p></th>
+              <tr>
+              <tr>
+                <td><div class=”item-box”>
+                    <a th:href="@{/item/{id}(id=*{id})}"><img
+                      th:src="@{/images/{name}(name=*{name})}"
+                      th:alt="*{title}"></img></a>
+                  </div></td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="text-center"
+                    th:text="*{#temporals.format(registDate,'yyyy/MM/dd')}">アップデート日</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </li>
+      </ul>
+
+    </div>
+    <!--/* アイテム詳細 */-->
+    <div th:fragment="item_detail">
+      <div class=”item-box”>
+        <table class="item_table" th:each="itemDetail : ${itemDetail}"
+          th:object="${itemDetail}">
+          <tbody>
+            <tr>
+              <th class="text-center"><p th:text="*{title}">素材名</p></th>
+            <tr>
+            <tr>
+              <td><img th:src="@{/images/{name}(name=*{name})}"
+                th:alt="*{title}"></img></td>
+            </tr>
+            <tr>
+              <td>
+                <p th:text="*{detail}">詳細</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="text-center"
+                  th:text="*{#temporals.format(registDate,'yyyy/MM/dd')}">アップデート日</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

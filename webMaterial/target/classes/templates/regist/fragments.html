@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>MARBLE [特別休暇]</title>
+</head>
+<body>
+
+    <!--/* メッセージー */-->
+  <div th:fragment="msg">
+    <p th:text="${msg}"></p>
+  </div>
+
+  <!--/* 登録フォーム */-->
+  <div th:fragment="regist_item">
+    <form class="regist_form" method="post" th:action="@{/item/top}"
+      th:object="${registItemForm}">
+      <table class="regist_item">
+        <tbody>
+          <tr><td>
+              <p>種類</p>
+          </td></tr>
+          <tr><td>
+              <div class="cp_ipselect cp_sl03">
+                <select required th:field="*{itemType}">
+                  <option value="" hidden>Choose</option>
+                  <option th:value="イラスト" th:text="イラスト"></option>
+                  <option th:value="写真" th:text="写真"></option>
+                  <option th:value="アイコン" th:text="アイコン"></option>
+                </select>
+              </div>
+          </td></tr>
+          <tr><td>
+              <p>ファイル名</p>
+          </td></tr>
+          <tr>
+            <td><label class="ef"> <input type="text"
+                placeholder="ファイル名" name="name" th:field="*{name}" />
+            </label></td>
+          </tr>
+          <tr><td>
+              <p>タイトル</p>
+          </td></tr>
+          <tr>
+            <td><label class="ef"> <input type="text"
+                placeholder="タイトル" name="title" th:field="*{title}" />
+            </label></td>
+          </tr>
+          <tr><td>
+              <p>詳細</p>
+          </td></tr>
+          <tr>
+            <td colspan="3" rowspan="3"><label class="ef">
+                <input type="text" placeholder="詳細" name="detail"
+                th:field="*{detail}" />
+            </label></td>
+          </tr>
+        </tbody>
+      </table>
+      <input class="common_button" name="regist" type="submit"
+        value="登録" />
+    </form>
+  </div>
+
+  <!--/* 登録確認 */-->
+  <div th:fragment="regist_detail" th:object="${registItem}">
+    <table class="regist_item">
+      <tbody>
+        <tr>
+          <td>
+            <p>種類</p>
+          </td>
+        </tr>
+        <tr>
+          <td th:value="*{itemType}"></td>
+        </tr>
+        <tr>
+          <td>
+            <p>ファイル名</p>
+          </td>
+        </tr>
+        <tr>
+          <td th:value="*{name}"></td>
+        </tr>
+        <tr>
+          <td>
+            <p>タイトル</p>
+          </td>
+        </tr>
+        <tr>
+          <td th:value="*{title}"></td>
+        </tr>
+        <tr>
+          <td>
+            <p>詳細</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" rowspan="3" th:value="*{detail}"></td>
+        </tr>
+        <tr>
+          <td><input class="common_button" name="regist"
+            type="submit" value="登録" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

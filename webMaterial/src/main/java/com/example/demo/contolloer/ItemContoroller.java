@@ -83,7 +83,7 @@ public class ItemContoroller {
         return "main/detail.html";
     }
 
-//    /** 何故か反映されないので退避 */
+    /** 何故か反映されないので退避 */
 //    /** アイテム登録サービス */
 //    @Autowired
 //    private RegistItemService registItemService;
@@ -95,7 +95,7 @@ public class ItemContoroller {
 //    }
 //
 //    /** 登録画面 */
-//    @GetMapping("top")
+//    @GetMapping("/")
 //    public String showRegistForm(Model model, @ModelAttribute(value = "registItemForm", binding = false)
 //    @Valid
 //    RegistItemForm registForm) {
@@ -108,7 +108,7 @@ public class ItemContoroller {
 //
 //    /** 登録確認画面：登録ボタン押下時 */
 //    @Transactional
-//    @PostMapping("top")
+//    @PostMapping("/")
 //    public String registItem(@ModelAttribute(value = "registItemForm")
 //    @Valid
 //    RegistItemForm registForm, BindingResult bindingResult) {
