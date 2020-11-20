@@ -4,18 +4,20 @@ public enum ItemType {
     //TODO 仮決め
     
     /** 1:イラスト */
-    イラスト(1),
+    picture(1,"イラスト"),
 
     /** 2: 写真 */
-    写真(2),
+    photo(2,"写真"),
 
     /** 3: アイコン */
-    アイコン(3);
+    icon(3,"アイコン");
 
     private int value;
+    private String label; 
 
-    private ItemType(int value) {
+    private ItemType(int value, String label) {
         this.value = value;
+        this.label = label;
     }
 
     /**
@@ -24,6 +26,9 @@ public enum ItemType {
      */
     public int getValue() {
        return this.value;
+    }
+    public String getLabel() {
+        return label;
     }
 
     /**
@@ -37,6 +42,16 @@ public enum ItemType {
                 .findFirst().get();
     }
     
-
+    /**
+     * 指定されたコード値に対応する列挙型を取得します。
+     * @param value コード値
+     * @return 帳票マスタコード列挙型
+     */
+    public static ItemType of(String label) {
+        return java.util.Arrays.stream(ItemType.class.getEnumConstants())
+                .filter(e -> e.getLabel() == label)
+                .findFirst().get();
+    }
+    
 
 }

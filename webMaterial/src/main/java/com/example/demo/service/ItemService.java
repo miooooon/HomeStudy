@@ -60,4 +60,24 @@ public class ItemService {
         }
         return itemDetail;
     }
+    
+    public ArrayList<ItemEntity> getSearchItem(String keyword) {
+        List<Map<String, Object>> item = itemDao.getSearchItem(keyword);
+        if (item.isEmpty()) {
+            return null;
+        }
+     // Modelクラスのインスタンスを生成して検索結果の情報をセット
+        ArrayList<ItemEntity> itemList = new ArrayList<ItemEntity>();
+        for (Map<String, Object> map : item) {
+            itemEntity = new ItemEntity();
+            itemEntity.setId((Integer) map.get("id"));
+            itemEntity.setItemType((String) map.get("item_type"));
+            itemEntity.setTitle((String) map.get("title"));
+            itemEntity.setName((String) map.get("name"));
+            Timestamp timestamp = (Timestamp) map.get("regist_date");
+            itemEntity.setRegistDate(timestamp.toLocalDateTime());
+            itemList.add(itemEntity);
+        }
+        return itemList;
+    }
 }

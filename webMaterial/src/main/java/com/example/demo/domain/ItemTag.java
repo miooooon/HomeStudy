@@ -6,38 +6,34 @@ package com.example.demo.domain;
         
 
         /** 1:かわいい */
-        かわいい(1),
+        cute(1,"かわいい"),
 
         /** 2: かっこいい */
-        かっこいい(2),
+        cool(2,"かっこいい"),
 
         /** 3: おしゃれ */
-        おしゃれ(3),
+        stylish(3,"おしゃれ"),
 
         /** 4: シンプル */
-        シンプル(4),
+        simple(4,"シンプル"),
 
         /** 5: ネタ */
-        ネタ(5),
-
-        /** 6: 海外出張申請 */
-        海外出張(6),
-
-        /** 7: 特別休暇申請 */
-        特別休暇(7),
-
-        /** 8: 育児介護休業申請 */
-        育児介護休業(8),
-
-        /** 9: 欠勤申請 */
-        欠勤(9);
+        funny(5,"ネタ");
 
         private int value;
+        private String label; 
+
+        private ItemTag(int value, String label) {
+            this.value = value;
+            this.label = label;
+        }
 
         private ItemTag(int value) {
             this.value = value;
         }
-
+        private ItemTag(String label) {
+            this.label = label;
+        }
         /**
          * 列挙型が保持するコード値を取得します。
          * @return コード値
@@ -45,6 +41,10 @@ package com.example.demo.domain;
         public int getValue() {
            return this.value;
         }
+        
+        public String getLabel() {
+            return this.label;
+         }
 
         /**
          * 指定されたコード値に対応する列挙型を取得します。
@@ -57,4 +57,5 @@ package com.example.demo.domain;
                     .findFirst().get();
         }
     }
+    
     

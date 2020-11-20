@@ -9,38 +9,39 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.example.demo.domain.ItemType;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class QuestionForm  implements Serializable {
+
+public class RequestForm  implements Serializable {
     
 
 
     private static final long serialVersionUID = 1L;
     
-    
-    @Pattern(regexp = "A|B|C|D|E")
-    private String fradio;
+    private ItemType itemType;
     
     @Pattern(regexp = "A|B|C|D|E")
     private String fradio2;
 
-    public String getFradio() {
-        return fradio;
-    }
     
-    public void setFradio(String fradio) {
-        this.fradio = fradio;
-    }
     
     public String getFradio2() {
         return fradio2;
     }
     
     public void setFradio2(String fradio2) {
-        this.fradio = fradio2;
+        this.fradio2 = fradio2;
+    }
+    
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
     }
 
 //        @NotBlank(message="選択してね")

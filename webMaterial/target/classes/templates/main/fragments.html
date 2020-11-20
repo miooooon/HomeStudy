@@ -29,6 +29,18 @@
         </div>
       </li>
     </ul>
+    
+    
+           <form  th:action="@{/item/search}" method="post" th:object="${searchForm}">
+          <div class="input-group">
+            <input type="text" th:field="*{keyword}" class="form-control" placeholder="Search for..." />
+            <span class="input-group-btn">
+              <input class="btn btn-default" type="submit" value="Search!" />
+            </span>
+          </div>
+        </form>
+    
+    
   </div>
 
   <div>

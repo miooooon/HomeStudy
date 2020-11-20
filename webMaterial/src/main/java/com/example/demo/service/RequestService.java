@@ -11,7 +11,7 @@ import com.example.demo.model.ItemEntity;
 import com.example.demo.repository.ItemDao;
 
 @Service
-public class QuestionService {
+public class RequestService {
 
     /** アイテムDAO */
 //    @Autowired

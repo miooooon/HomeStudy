@@ -19,7 +19,7 @@ public class ItemDao {
     public List<Map<String, Object>> getItemList(String itemType) {
         List<Map<String, Object>> itemList = new ArrayList<Map<String, Object>>();
         itemList = data.queryForList(
-                "select id, item_type, name, title, regist_date from item_detail  where item_type = ? order by id",
+                "select id, item_type, name, title, regist_date from item_detail where item_type = ? order by id",
                 new Object[] { itemType });
         // 検索結果が空でないことをチェック
         if (itemList.isEmpty()) {
@@ -41,6 +41,22 @@ public class ItemDao {
         return itemDetail;
     }
     
+    /** 検索アイテム取得 */
+    public List<Map<String, Object>> getSearchItem(String keyword) {
+        List<Map<String, Object>> itemList = new ArrayList<Map<String, Object>>();
+        itemList = data.queryForList(
+                "select id, item_type, name, title, detail, regist_date from item_detail where title like ? or detail like ?",
+//                 "%き%", "%き%");
+//                "select id, item_type, name, title, detail, regist_date from item_detail  where title like '%keyword%' or detail like '%keyword%'",
+                new Object[] { "%" + keyword +"%", "%" + keyword +"%"});
+
+
+                // 検索結果が空でないことをチェック
+        if (itemList.isEmpty()) {
+            return null;
+        }
+        return itemList;
+    }
 
 //
 //    /**
