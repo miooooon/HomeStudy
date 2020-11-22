@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.bean.ItemTypeBean;
 import com.example.demo.domain.ItemTag;
 import com.example.demo.domain.ItemType;
+import com.example.demo.form.RegistItemForm;
 import com.example.demo.form.RequestForm;
 import com.example.demo.form.RequestForm;
 import com.example.demo.model.ItemEntity;
@@ -53,9 +54,9 @@ public class RequestContoroller {
     /** アンケート画面 */
     @GetMapping("top")
     public String requestTop(Model model 
-//            ,@ModelAttribute(value = "requestForm", binding = false)
-//    @Valid
-//    RequestForm inputForm
+            ,@ModelAttribute(value = "requestForm", binding = false)
+    @Valid
+    RequestForm requestForm
     ) {
 
         // セッションの値を更新
@@ -64,66 +65,103 @@ public class RequestContoroller {
         return "request/top.html";
     }
 
+    /**
+     * 入力画面：確認ボタン押下時の処理を行います。
+     * @param inputForm 入力フォーム
+     * @param bindingResult バインド結果
+     * @return 画面テンプレート
+     */
     @PostMapping("top")
-    public String requestTop(Model model, @ModelAttribute(value = "requestForm", binding = false)
+    public String validateForRequest(@ModelAttribute("requestForm")
     @Valid
-    RequestForm inputForm, BindingResult bindingResult, HttpServletRequest request) {
+    RequestForm requestForm, BindingResult bindingResult) {
         // エラーがある場合、自画面遷移する
         if (bindingResult.hasErrors()) {
             return "request/top.html";
         }
-        HttpSession session = request.getSession();
-        session.setAttribute("hogeForm", inputForm);
-        return "redirect:/request/confirm";
+//        HttpSession session = request.getSession();
+//        session.setAttribute("hogeForm", inputForm);
+     // エラーが無ければ確認画面にリダイレクト
+        return "redirect:confirm";
     }
+    
+
+
+
+    
+    
     /**
-     * 確認画面
+     * 入力確認画面：初期表示時の処理を行います。
      * 
      * @param model
      * @param hogeForm
      * @return
      */
     @GetMapping("confirm")
-    public String requestConfirm(Model model,RedirectAttributes redirectAttributes,
-@ModelAttribute(value = "requestForm", binding = false)
-     RequestForm requestForm) {
+    public String requestConfirm(Model model, @ModelAttribute(value = "requestForm", binding = false)
+    @Valid RequestForm requestForm) {
+        
+
+        
             // セッションの値を更新
         model.addAttribute("selectItems", requestForm);
             return "request/confirm.html";
     }
 
+    
+    
     /**
-     * 確認画面
+     * 入力確認画面：完了ボタン押下時の処理を行います。
      * 
      * @param model
      * @param hogeForm
      * @return
      */
     @PostMapping("confirm")
-    public String validateRequestConfirm(Model model, RedirectAttributes redirectAttributes,
+    public String validateRequestConfirm(Model model, 
             @ModelAttribute(value = "requestForm", binding = false)
             @Valid
-            RequestForm inputForm, BindingResult bindingResult) {
-        // 入力確認画面からの復帰か否かを判定
-//        if (!inputForm.isCreateForm()) {
-//            throw new HttpBadRequestException(this.getClass(), messageSourceAccessor.getMessage("errors.mng.transition.create"));
-//        }
-        // 入力確認画面用にフォームを設定
-//        if (inputForm.getCmtStatusSelect() != null) {
-//            inputForm.setCmtStatusFlg(CmtStatusFlg.of(inputForm.getCmtStatusSelect()));
-//        } else {
-//            inputForm.setCmtStatusFlg(CmtStatusFlg.使用可);
-//        }
-        // セッションの値を更新
-        model.addAttribute("requestForm", inputForm);
-        return "request/confirm.html";
+            RequestForm requestForm, BindingResult bindingResult) {
+
+     // 登録のために詰めなおし
+        // 登録処理
+
+     // エラーが無ければ完了画面にリダイレクト
+//        model.addAttribute("requestForm", requestForm);
+//        return "request/confirm.html";
+        return "redirect:complete";
     }
-//    @GetMapping
-//    public ModelAndView index() {
-//       ModelAndView model = new ModelAndView();
-//       model.setAttribute("statusList", ItemType.values());
-//       return model;
+    /**
+     * 完了画面：画面の表示処理を行います。
+     * @param model モデル
+     * @param commentCd コメントコード
+     * @param inputForm 入力フォーム（バインド対象外、直前の処理名を取るために必要）
+     * @return 画面テンプレート
+     */
+//    @GetMapping({"complete", "complete/{commentCd}"})
+//    public String showComplete(Model model,
+//            @PathVariable(value = "commentCd", required = false) Integer commentCd,
+//            @ModelAttribute(value = "commentInputForm", binding = false) CommentInputForm inputForm) {
+//
+//        // 編集削除判定用のコメントコード
+//        if (commentCd != null) {
+//            model.addAttribute("commentCd", commentCd);
+//        }
+//
+//        // 入力、削除等のメッセージ
+//        RemoteProcedure procedure = inputForm.getTargetProcedure();
+//        model.addAttribute("targetProcedure", procedure.toString());
+//
+//        // 登録完了に伴い、入力フォームを初期化（リロード用に直前の処理種別だけは復元）
+//        CommentInputForm emptyForm = this.getDefaultInputForm();
+//        emptyForm.setTargetProcedure(procedure);
+//        model.addAttribute("commentInputForm", emptyForm);
+//
+//        // 画面描画
+//        return templateLocation + "/complete.html";
 //    }
+//}
+
     /** 登録画面 */
 //    @GetMapping("top")
 //    public String showRegistForm(Model model, @ModelAttribute(value = "registItemForm", binding = false)

@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.example.demo.domain.ItemTag;
 import com.example.demo.domain.ItemType;
 
 import lombok.Getter;
@@ -23,18 +24,7 @@ public class RequestForm  implements Serializable {
     
     private ItemType itemType;
     
-    @Pattern(regexp = "A|B|C|D|E")
-    private String fradio2;
-
-    
-    
-    public String getFradio2() {
-        return fradio2;
-    }
-    
-    public void setFradio2(String fradio2) {
-        this.fradio2 = fradio2;
-    }
+    private ItemTag itemTag;
     
     public ItemType getItemType() {
         return itemType;
@@ -42,6 +32,14 @@ public class RequestForm  implements Serializable {
 
     public void setItemType(ItemType itemType) {
         this.itemType = itemType;
+    }
+
+    public ItemTag getItemTag() {
+        return itemTag;
+    }
+
+    public void setItemTag(ItemTag itemTag) {
+        this.itemTag = itemTag;
     }
 
 //        @NotBlank(message="選択してね")

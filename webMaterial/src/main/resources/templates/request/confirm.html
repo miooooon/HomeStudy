@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8" />
+<meta data-detaills="origin:jsp/app/asc-ni.jsp" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>WebMaterial</title>
+</head>
+<body onload="start()">
+
+  <div class="menu"></div>
+  <div class="main">
+
+
+    <p>今後素材を増やしていく参考にさせていただきます。</p>
+    <br>
+
+
+    <form th:action="@{/requset/confirm}" method="post"
+      th:object="${requsetForm}">
+      <div class="input-group">
+
+        <label><abbr title="required">種類</abbr></label>
+        <div class="radio" th:each="itemType : ${selectItems}">
+          <label> <input type="radio" name="itemType"
+            th:value="${itemType.value}" th:text="${itemType.label}" >
+          </label>
+        </div>
+        <br> <label><abbr title="required">タグ</abbr></label>
+        <div class="radio" th:each="itemTag : ${selectTags}">
+          <label> <input type="radio" name="itemTag"
+            th:value="${itemTag.value}" th:text="${itemTag.label}">
+          </label>
+        </div>
+
+        <br> <input class="common_button" name="regist" type="submit"
+        value="確認" />
+      </div>
+    </form>
+    
+    
+
+  </div>
+</body>
+</html>
