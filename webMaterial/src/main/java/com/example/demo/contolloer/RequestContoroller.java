@@ -1,15 +1,7 @@
 package com.example.demo.contolloer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,43 +13,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.bean.ItemTypeBean;
 import com.example.demo.domain.ItemTag;
 import com.example.demo.domain.ItemType;
 import com.example.demo.form.RegistItemForm;
 import com.example.demo.form.RequestForm;
-import com.example.demo.form.RequestForm;
 import com.example.demo.model.ItemEntity;
-import com.example.demo.service.ItemService;
-import com.example.demo.service.RequestService;
+import com.example.demo.model.RequestEntity;
 import com.example.demo.service.RequestService;
 
 @Controller
 @RequestMapping("request")
-//@SessionAttributes("requestForm")
+@SessionAttributes("requestForm")
 public class RequestContoroller {
 
     /** アンケートサービス */
     @Autowired
     private RequestService requestService;
 
-    /** 初期化されたアンケートフォーム */
-    @ModelAttribute("requestForm")
-    public RequestForm getRequestForm() {
-        return new RequestForm();
-    }
+    /** 初期化されたフォーム */
+//    @ModelAttribute("requestForm")
+//    public RequestForm getRequestForm() {
+//        return new RequestForm();
+//    }
 
     /** トップページ */
     /** アンケート画面 */
     @GetMapping("top")
-    public String requestTop(Model model 
-            ,@ModelAttribute(value = "requestForm", binding = false)
-    @Valid
-    RequestForm requestForm
-    ) {
+    public String requestTop(Model model) {
 
         // セッションの値を更新
         model.addAttribute("selectItems", ItemType.values());
@@ -66,10 +49,7 @@ public class RequestContoroller {
     }
 
     /**
-     * 入力画面：確認ボタン押下時の処理を行います。
-     * @param inputForm 入力フォーム
-     * @param bindingResult バインド結果
-     * @return 画面テンプレート
+     * 入力画面：確認ボタン押下時の処理。
      */
     @PostMapping("top")
     public String validateForRequest(@ModelAttribute("requestForm")
@@ -79,98 +59,56 @@ public class RequestContoroller {
         if (bindingResult.hasErrors()) {
             return "request/top.html";
         }
-//        HttpSession session = request.getSession();
-//        session.setAttribute("hogeForm", inputForm);
-     // エラーが無ければ確認画面にリダイレクト
+        // エラーが無ければ確認画面にリダイレクト
         return "redirect:confirm";
     }
-    
 
-
-
-    
-    
     /**
-     * 入力確認画面：初期表示時の処理を行います。
-     * 
-     * @param model
-     * @param hogeForm
-     * @return
+     * 入力確認画面
      */
     @GetMapping("confirm")
     public String requestConfirm(Model model, @ModelAttribute(value = "requestForm", binding = false)
-    @Valid RequestForm requestForm) {
-        
-
-        
-            // セッションの値を更新
+    @Valid
+    RequestForm requestForm) {
+        // セッションの値を更新
         model.addAttribute("selectItems", requestForm);
-            return "request/confirm.html";
+        return "request/confirm.html";
     }
 
-    
-    
     /**
      * 入力確認画面：完了ボタン押下時の処理を行います。
-     * 
-     * @param model
-     * @param hogeForm
-     * @return
      */
     @PostMapping("confirm")
-    public String validateRequestConfirm(Model model, 
-            @ModelAttribute(value = "requestForm", binding = false)
-            @Valid
-            RequestForm requestForm, BindingResult bindingResult) {
-
-     // 登録のために詰めなおし
+    public String validateRequestConfirm(Model model, @ModelAttribute(value = "requestForm", binding = false)
+    @Valid
+    RequestForm requestForm, BindingResult bindingResult) {
+        // 登録のために詰めなおし
+        RequestEntity request = convertFormToItem(requestForm);
         // 登録処理
-
-     // エラーが無ければ完了画面にリダイレクト
-//        model.addAttribute("requestForm", requestForm);
-//        return "request/confirm.html";
+        requestService.registRequest(request);
+        // エラーが無ければ完了画面にリダイレクト
         return "redirect:complete";
     }
-    /**
-     * 完了画面：画面の表示処理を行います。
-     * @param model モデル
-     * @param commentCd コメントコード
-     * @param inputForm 入力フォーム（バインド対象外、直前の処理名を取るために必要）
-     * @return 画面テンプレート
-     */
-//    @GetMapping({"complete", "complete/{commentCd}"})
-//    public String showComplete(Model model,
-//            @PathVariable(value = "commentCd", required = false) Integer commentCd,
-//            @ModelAttribute(value = "commentInputForm", binding = false) CommentInputForm inputForm) {
-//
-//        // 編集削除判定用のコメントコード
-//        if (commentCd != null) {
-//            model.addAttribute("commentCd", commentCd);
-//        }
-//
-//        // 入力、削除等のメッセージ
-//        RemoteProcedure procedure = inputForm.getTargetProcedure();
-//        model.addAttribute("targetProcedure", procedure.toString());
-//
-//        // 登録完了に伴い、入力フォームを初期化（リロード用に直前の処理種別だけは復元）
-//        CommentInputForm emptyForm = this.getDefaultInputForm();
-//        emptyForm.setTargetProcedure(procedure);
-//        model.addAttribute("commentInputForm", emptyForm);
-//
-//        // 画面描画
-//        return templateLocation + "/complete.html";
-//    }
-//}
 
-    /** 登録画面 */
-//    @GetMapping("top")
-//    public String showRegistForm(Model model, @ModelAttribute(value = "registItemForm", binding = false)
-//    @Valid
-//    RegistItemForm registForm) {
-//        // 入力用の空フォームを設定
-//        registForm = this.getRegistItemForm();
-//        // セッションの値を更新
-//        model.addAttribute("registItemForm", registForm);
-//        return "regist/regist.html";
-//    }
+    /** 登録フォームからエンティティに詰めなおし */
+    private RequestEntity convertFormToItem(RequestForm requestForm) {
+        RequestEntity request = new RequestEntity();
+        request.setItemType(requestForm.getItemType());
+        request.setItemTag(requestForm.getItemTag());
+        // 登録日を今の時間に設定
+        request.setRegistDate(LocalDateTime.now());
+        return request;
+    }
+
+    /**
+     * 完了画面
+     */
+    @GetMapping({ "complete" })
+    public String showComplete(Model model, @ModelAttribute(value = "requestForm", binding = false)
+    @Valid
+    RequestForm requestForm, BindingResult bindingResult) {
+        model.addAttribute("commentInputForm", requestForm);
+        // 画面描画
+        return "regist/complete.html";
+    }
 }

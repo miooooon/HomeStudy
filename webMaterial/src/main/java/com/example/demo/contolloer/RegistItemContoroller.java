@@ -68,6 +68,7 @@ public class RegistItemContoroller {
             item.setName(registForm.getName());
             item.setTitle(registForm.getTitle());
             item.setDetail(registForm.getDetail());
+            //TODO タグ登録
             // 登録日を今の時間に設定
             item.setRegistDate(LocalDateTime.now());
             return item;

@@ -8,21 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.ItemEntity;
+import com.example.demo.model.RequestEntity;
 import com.example.demo.repository.ItemDao;
+import com.example.demo.repository.RequestDao;
 
 @Service
 public class RequestService {
 
-    /** アイテムDAO */
-//    @Autowired
-//    private ItemDao itemDao;
-//    @Autowired
-//    private ItemEntity itemEntity;
-//
-//    public ArrayList<ItemEntity> getItemList(String itemtype) {
-//        List<Map<String, Object>> item = itemDao.getItemList(itemtype);
-//        if (item.isEmpty()) {
-//            return null;
-//        }
-//    }
+    /** リクエストDAO */
+  @Autowired
+  private RequestDao requestDao;
+    
+    public void registRequest(RequestEntity request) {
+            requestDao.registRequest(request);
+    }
 }

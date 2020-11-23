@@ -16,14 +16,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-public class RequestForm  implements Serializable {
+public class RequestForm implements Serializable {
     
-
-
     private static final long serialVersionUID = 1L;
     
+    /** 種類 */
     private ItemType itemType;
     
+    /** タグ */
     private ItemTag itemTag;
     
     public ItemType getItemType() {
