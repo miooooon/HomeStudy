@@ -13,7 +13,7 @@ public class RequestDao {
     JdbcTemplate data; // Spring JDBCのテンプレートクラス
 
     public void registRequest(RequestEntity request) {
-        String sql = "insert into item_request(item_type, item_tag, regist_date)value(?, ?, ?)";
+        String sql = "insert into request_item(item_type, item_tag, regist_date)value(?, ?, ?)";
         data.update(sql, new Object[] { request.getItemType(), request.getItemTag(), request.getRegistDate() });
     }
 }
