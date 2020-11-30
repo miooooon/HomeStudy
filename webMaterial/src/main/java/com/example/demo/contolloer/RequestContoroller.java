@@ -81,27 +81,27 @@ public class RequestContoroller {
     /**
      * 入力確認画面：完了ボタン押下時の処理を行います。
      */
-//    @PostMapping("confirm")
-//    public String validateRequestConfirm(Model model, @ModelAttribute(value = "requestForm", binding = false)
-//    @Valid
-//    RequestForm requestForm, BindingResult bindingResult) {
-//        // 登録のために詰めなおし
-//        RequestEntity request = convertFormToItem(requestForm);
-//        // 登録処理
-//        requestService.registRequest(request);
-//        // エラーが無ければ完了画面にリダイレクト
-//        return "redirect:complete";
-//    }
+    @PostMapping("confirm")
+    public String validateRequestConfirm(Model model, @ModelAttribute(value = "requestForm", binding = false)
+    @Valid
+    RequestForm requestForm, BindingResult bindingResult) {
+        // 登録のために詰めなおし
+        RequestEntity request = convertFormToItem(requestForm);
+        // 登録処理
+        requestService.registRequest(request);
+        // エラーが無ければ完了画面にリダイレクト
+        return "redirect:complete";
+    }
 
     /** 登録フォームからエンティティに詰めなおし */
-//    private RequestEntity convertFormToItem(RequestForm requestForm) {
-//        RequestEntity request = new RequestEntity();
-//        request.setItemType(requestForm.getItemType());
-//        request.setItemTag(requestForm.getItemTag());
-//        // 登録日を今の時間に設定
-//        request.setRegistDate(LocalDateTime.now());
-//        return request;
-//    }
+    private RequestEntity convertFormToItem(RequestForm requestForm) {
+        RequestEntity request = new RequestEntity();
+        request.setItemType(requestForm.getItemType());
+        request.setItemTag(requestForm.getItemTag());
+        // 登録日を今の時間に設定
+        request.setRegistDate(LocalDateTime.now());
+        return request;
+    }
 
     /**
      * 完了画面
@@ -109,7 +109,7 @@ public class RequestContoroller {
     @GetMapping("complete")
     public String showComplete(Model model, @ModelAttribute(value = "requestForm", binding = false)
     @Valid
-    RequestForm requestForm, BindingResult bindingResult) {
+    RequestForm requestForm) {
         model.addAttribute("requestForm", requestForm);
         // 画面描画
         return "regist/complete.html";
