@@ -24,11 +24,9 @@
           </td></tr>
           <tr><td>
               <div class="cp_ipselect cp_sl03">
-                <select required th:field="*{itemType}">
-                  <option value="" hidden>Choose</option>
-                  <option th:value="イラスト" th:text="イラスト"></option>
-                  <option th:value="写真" th:text="写真"></option>
-                  <option th:value="アイコン" th:text="アイコン"></option>
+                <select required th:field="*{itemType}"  th:each="itemType : ${T(com.example.demo.domain.ItemType).values()}">
+                  <option th:value="${{itemType.value}}" 
+                  th:text="${{itemType.label}}"></option>
                 </select>
               </div>
           </td></tr>

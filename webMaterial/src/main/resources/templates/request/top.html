@@ -19,21 +19,22 @@
     <p>今後素材を増やしていく参考にさせていただきます。</p>
     <br>
 
-
     <form th:action="@{/request/top}" method="post"
       th:object="${requestForm}">
       <div class="input-group">
 
         <label><abbr title="required">種類</abbr></label>
-        <div class="radio" th:each="itemType : ${selectItems}">
-          <label> <input type="radio" name="itemType" th:field="*{selectItems}"
-            th:value="${itemType.value}" th:text="${itemType.label}" >
+        <div  class="radio" th:each="itemType : ${selectItems}">
+          <input type="radio" name="itemType"
+          th:value="${{itemType.value}}"
+           th:field="*{itemType}"/>
+           <label th:text="${{itemType.label}}" >
           </label>
-        </div>
+        </div >
         <br> <label><abbr title="required">タグ</abbr></label>
         <div class="radio" th:each="itemTag : ${selectTags}">
-          <label> <input type="radio" name="itemTag" th:field="*{selectItems}"
-            th:value="${itemTag.value}" th:text="${itemTag.label}">
+          <label> <input type="radio" name="itemTag" th:field="*{itemTag}"
+            th:value="${{itemTag.value}}" th:text="${{itemTag.label}}">
           </label>
         </div>
 

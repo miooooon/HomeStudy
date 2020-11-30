@@ -19,42 +19,85 @@ import lombok.Setter;
 public class RequestForm implements Serializable {
     
     private static final long serialVersionUID = 1L;
+
+//    /** 種類 */
+//    private int itemType;
+//    
+//    /** タグ */
+//    private int itemTag;
+//
+//    
+//    /**
+//     * itemTypeを取得する。
+//     * @return itemType
+//     */
+//    public int getItemType() {
+//        return itemType;
+//    }
+//
+//    
+//    /**
+//     * itemTypeを設定します。
+//     * @param itemType
+//     */
+//    public void setItemType(int itemType) {
+//        this.itemType = itemType;
+//    }
+//
+//    
+//    /**
+//     * itemTagを取得する。
+//     * @return itemTag
+//     */
+//    public int getItemTag() {
+//        return itemTag;
+//    }
+//
+//    
+//    /**
+//     * itemTagを設定します。
+//     * @param itemTag
+//     */
+//    public void setItemTag(int itemTag) {
+//        this.itemTag = itemTag;
+//    }
     
     /** 種類 */
     private ItemType itemType;
     
     /** タグ */
     private ItemTag itemTag;
+
     
+    /**
+     * itemTypeを取得する。
+     * @return itemType
+     */
     public ItemType getItemType() {
         return itemType;
     }
 
+    /**
+     * itemTypeを設定します。
+     * @param itemType
+     */
     public void setItemType(ItemType itemType) {
         this.itemType = itemType;
     }
 
+    /**
+     * itemTagを取得する。
+     * @return itemTag
+     */
     public ItemTag getItemTag() {
         return itemTag;
     }
 
+    /**
+     * itemTagを設定します。
+     * @param itemTag
+     */
     public void setItemTag(ItemTag itemTag) {
         this.itemTag = itemTag;
     }
-
-//        @NotBlank(message="選択してね")
-//        private String category;
-//
-//        @NotBlank(message="何か入力してね")
-//        @Length(max=1000)
-//        private String content;
-//
-//        public Map<String, String> getCategoryList() {
-//        Map<String, String> categoryMap = new LinkedHashMap<String, String>();
-//            categoryMap.put("1", "カテゴリー１");
-//            categoryMap.put("2", "カテゴリー２");
-//            categoryMap.put("3", "カテゴリー３");
-//            return categoryMap;
-//        }
-    
 }
