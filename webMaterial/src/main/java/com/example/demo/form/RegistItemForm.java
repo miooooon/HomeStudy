@@ -14,6 +14,20 @@ public class RegistItemForm {
     /** 詳細 */
     private String detail;
     
+    
+    
+
+    
+    private String selectedItemType;
+    
+    public String getSelectedItemType() {
+        return selectedItemType;
+  }
+
+  public void setSelectedItemType(String selectedItemType) {
+        this.selectedItemType = selectedItemType;
+  }
+    
     /**
      * itemTypeを取得する。
      * 
@@ -23,6 +37,7 @@ public class RegistItemForm {
         return this.itemType;
     }
 
+    
     /**
      * itemTypeを設定します。
      * 

@@ -15,89 +15,48 @@ import com.example.demo.domain.ItemType;
 import lombok.Getter;
 import lombok.Setter;
 
-
 public class RequestForm implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
 
-//    /** 種類 */
-//    private int itemType;
-//    
-//    /** タグ */
-//    private int itemTag;
-//
-//    
-//    /**
-//     * itemTypeを取得する。
-//     * @return itemType
-//     */
-//    public int getItemType() {
-//        return itemType;
-//    }
-//
-//    
-//    /**
-//     * itemTypeを設定します。
-//     * @param itemType
-//     */
-//    public void setItemType(int itemType) {
-//        this.itemType = itemType;
-//    }
-//
-//    
-//    /**
-//     * itemTagを取得する。
-//     * @return itemTag
-//     */
-//    public int getItemTag() {
-//        return itemTag;
-//    }
-//
-//    
-//    /**
-//     * itemTagを設定します。
-//     * @param itemTag
-//     */
-//    public void setItemTag(int itemTag) {
-//        this.itemTag = itemTag;
-//    }
-    
+    private static final long serialVersionUID = 1L;
     /** 種類 */
-    private ItemType itemType;
+    private String itemType;
     
     /** タグ */
-    private ItemTag itemTag;
+    private String itemTag;
 
-    
     /**
      * itemTypeを取得する。
+     * 
      * @return itemType
      */
-    public ItemType getItemType() {
+    public String getItemType() {
         return itemType;
     }
 
     /**
      * itemTypeを設定します。
+     * 
      * @param itemType
      */
-    public void setItemType(ItemType itemType) {
+    public void setItemType(String itemType) {
         this.itemType = itemType;
     }
 
     /**
      * itemTagを取得する。
+     * 
      * @return itemTag
      */
-    public ItemTag getItemTag() {
+    public String getItemTag() {
         return itemTag;
     }
 
     /**
      * itemTagを設定します。
+     * 
      * @param itemTag
      */
-    public void setItemTag(ItemTag itemTag) {
+    public void setItemTag(String itemTag) {
         this.itemTag = itemTag;
     }
 }

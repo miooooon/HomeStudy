@@ -20,27 +20,22 @@
     <br>
 
 
-    <form th:action="@{/requset/confirm}" method="post"
+    <form th:action="@{/request/confirm}" method="post"
       th:object="${requestForm}">
       <div class="input-group">
 
         <label><abbr title="required">種類</abbr></label>
-        <div>
-          <input type="radio" name="itemType"
-          th:value="${itemType}"
-           th:field="*{itemType}"/>
-           <label th:text="${{itemType.label}}" >
-          </label>
-        </div >
-        <br> <label><abbr title="required">タグ</abbr></label>
-        <div class="radio" th:each="itemTag : ${T(com.example.demo.domain.ItemTag).values()}">
-          <label> <input type="radio" name="itemTag" th:field="*{itemTag}"
-            th:value="${{itemTag.value}}" th:text="${{itemTag.label}}">
-          </label>
+        <div th:each="itemType : ${selectItems}">
+          <p th:field="*{itemType}" th:value="${itemType.value}"
+            th:text="${itemType.label}"></p>
         </div>
-
-        <br> <input class="common_button" name="request" type="submit"
-        value="確認" />
+        <br> <label><abbr title="required">タグ</abbr></label>
+        <div th:each="itemTag : ${selectTags}">
+          <p th:field="*{itemTag}" th:value="${itemTag.value}"
+            th:text="${itemTag.label}"></p>
+        </div>
+        <br> <input class="common_button" name="request"
+          type="submit" value="確認" />
       </div>
     </form>
 

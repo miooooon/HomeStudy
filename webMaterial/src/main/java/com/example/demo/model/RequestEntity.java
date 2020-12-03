@@ -13,9 +13,9 @@ public class RequestEntity implements Serializable {
     
         private static final long serialVersionUID = 1L;
         /** 種類 */
-        private ItemType itemType;
+        private Integer itemType;
         /** タグ */
-        private ItemTag itemTag;
+        private Integer itemTag;
         /** 登録日 */
         private LocalDateTime registDate;
 
@@ -25,19 +25,19 @@ public class RequestEntity implements Serializable {
             this.registDate = null;
         }
 
-        public ItemType getItemType() {
+        public Integer getItemType() {
             return itemType;
         }
 
-        public void setItemType(ItemType itemType) {
-            this.itemType = itemType;
+        public void setItemType(Integer integer) {
+            this.itemType = integer;
         }
 
-        public ItemTag getItemTag() {
+        public Integer getItemTag() {
             return itemTag;
         }
 
-        public void setItemTag(ItemTag itemTag) {
+        public void setItemTag(Integer itemTag) {
             this.itemTag = itemTag;
             
         }
